@@ -1,75 +1,83 @@
-# MINI PROJECT WEST AFRICAN CRIME RATE
-# Population and Livelihood Indicators
+---
+title: "West African Crime Corrected"
+author: "Stella Oladele Project 1 Corrected"
+format: pdf
+---
+Introduction
+## This project analyses major crime data from selected cities in West African countries collected in 1974. Using R, I created and explored vectors containing the countries, cities, and number of crimes. I then organized the data into a data frame, calculated the total number of crimes, classified cities according to their crime rates, and compared crime totals between countries. To approach this we make use of Base R function and dplyr package()
 
+
+![crime rate](https://thumbs.dreamstime.com/b/crime-rate-ratio-number-felonies-misdemeanours-recorded-police-text-concept-button-keyboard-394442096.jpg)
+
+
+![crime rate](https://thumbs.dreamstime.com/b/crime-rate-ratio-number-felonies-misdemeanours-recorded-police-text-concept-card-379787046.jpg)
+```{r}
 # Question 1a
 # Create a vector containing all countries shown in the table 1
 # Table 1: Count of the number of crimes in cities in West African 
 
 
+```
 
-country <- c("Nigeria", "Nigeria", "Nigeria", "Cameroon", "Nigeria",
-             "Nigeria", "Nigeria", "Cameroon", "Nigeria", "Nigeria",
-             "Nigeria", "Nigeria", "Nigeria", "Nigeria", "Nigeria",
-             "Nigeria", "Cameroon", "Nigeria", "Nigeria", "Nigeria")
+
+
+```{r}
+#| label: Country
+country <- c("Nigeria", "Nigeria", "Nigeria", "Cameroon", "Nigeria","Nigeria", "Nigeria", "Cameroon", "Nigeria", "Nigeria",
+"Nigeria", "Nigeria", "Nigeria", "Nigeria", "Nigeria", "Nigeria", "Cameroon", "Nigeria", "Nigeria", "Nigeria")
 
 country
+```
 
+
+```{r}
 length(country)
-
-
 # 1c
 length(unique(country))
-
 # 1c
 unique(country)
 
+```
+
+
+```{r}
+#| label: City
 # 1d
-city <- c("Maiduguri", "Unknown", "Kano", "Bamenda", "Port Harcourt",
-          "Potiskum", "Damaturu", "Unknown", "Jos", "Lagos", 
-          "Gombe", "Kaduna", "Logo district", "Konduga", "Warri", 
-          "Bama", "Buea", "Buni Yadi", "Damboa", "Gamboru")
+city <- c("Maiduguri", "Unknown", "Kano", "Bamenda", "Port Harcourt","Potiskum", "Damaturu", "Unknown", "Jos", "Lagos", "Gombe", "Kaduna", "Logo district", "Konduga", "Warri", "Bama", "Buea", "Buni Yadi", "Damboa", "Gamboru")
 
 # 1d
 city
+```
 
+```{r}
 # 1d
 length(city)
-
 length(unique(city))
-
 unique(city)
+```
 
-
+```{r}
 # 1d
 n_crime <- c( 488, 225, 130, 87, 76,
               65, 63, 55, 51, 46, 
               42, 38, 37, 36, 35,
               32, 31, 30, 30, 29)
-
-
 n_crime
-
 length(n_crime)
-
 length(unique(n_crime))
-
 unique(n_crime)
+```
 
-
-
+```{r}
 # 1e
 class(country)
-
 class(city)
-
 class(n_crime)
 
 
 # 1e
 str(country)
-
 str(city)
-
 str(n_crime)
 
 
@@ -77,7 +85,6 @@ str(n_crime)
 is.character(country)
 is.character(city)
 is.numeric(n_crime)
-
 
 # 1e
 is.vector(country)
@@ -88,6 +95,9 @@ is.vector(n_crime)
 # 1f
 sum(n_crime)
 
+```
+
+```{r}
 # 1g 
 # Ans: Data frame
 
@@ -101,7 +111,10 @@ crime_rate <- character(length(n_crime))
 crime_rate
 crime_data <- data.frame(country, city, n_crime, crime_rate)
 crime_data
+```
 
+
+```{r}
 crime_data$crime_rate <- ifelse(
   test = crime_data$n_crime >= 400,
   yes = "High", 
@@ -114,17 +127,16 @@ crime_data$crime_rate <- ifelse(
 
 crime_data
 
-
 subset(crime_data, country == "Nigeria")
 
 aggregate(crime_data$n_crime, by = list(country = country), FUN = sum)
 
 #
+```
 
-# load packages -----------------------------------------------------------
 
+```{r}
 library(dplyr)
-
 
 ## Using dplyr
 
@@ -135,7 +147,6 @@ crime_data |>
     average_no_of_crime = mean(n_crime)
 )
 
-    
 crime_data |>
   summarize(
     .by = country,
@@ -144,9 +155,6 @@ crime_data |>
   ) |>
   top_n( n = 1, wt =total_crime)
 
-
-
-
-
+```
 
 
