@@ -57,6 +57,7 @@ unique(city)
 ```
 
 ```{r}
+#| label: n_crime
 # 1d
 n_crime <- c( 488, 225, 130, 87, 76,
               65, 63, 55, 51, 46, 
@@ -69,6 +70,7 @@ unique(n_crime)
 ```
 
 ```{r}
+#| label: Data Structure
 # 1e
 class(country)
 class(city)
@@ -98,6 +100,7 @@ sum(n_crime)
 ```
 
 ```{r}
+#| label: crime_data
 # 1g 
 # Ans: Data frame
 
